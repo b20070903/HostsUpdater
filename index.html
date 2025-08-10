@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hosts Updater</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="/eel.js"></script>
+    <!-- 以 PNG 當 favicon -->
+    <link rel="icon" type="image/png" sizes="512x512" href="圖示/logo.png">
+</head>
+<body>
+
+    <!-- 管理員權限警告橫幅 -->
+    <div id="admin-warning-banner" style="display: none;">
+        <img src="圖示/警告.svg" alt="警告圖示" class="icon-img-banner">
+        <span>您目前未使用管理員權限執行，部分功能 (如寫入、還原) 可能會失敗。</span>
+    </div>
+
+    <!-- 整體應用程式容器 -->
+    <div class="app-wrapper">
+        <!-- 主應用程式框架 -->
+        <div class="main-container">
+            <!-- 左側控制面板 -->
+            <div class="left-panel">
+                <div class="logo-container">
+                                            <!-- 使用者可以選擇 logo.svg 或 logo.png -->
+                        <img src="圖示/logo.svg" alt="Hosts Updater Logo" class="logo">
+                    </a>
+                </div>
+                <div class="control-section">
+                    <label for="url-entry">來源 URL</label>
+                    <input type="text" id="url-entry" value="https://a.dove.isdumb.one/list.txt" placeholder="輸入 hosts 來源網址...">
+                </div>
+                <div class="control-section">
+                    <label for="hosts-entry">Hosts 檔案路徑</label>
+                    <div class="input-with-button">
+                        <input type="text" id="hosts-entry" placeholder="將會自動偵測路徑...">
+                        <button id="btn-browse" class="btn btn-icon" title="瀏覽本機檔案">
+                            <img src="圖示/瀏覽.svg" alt="瀏覽" class="icon-img">
+                        </button>
+                    </div>
+                </div>
+                <div class="progress-bar-container">
+                    <div id="progress-bar" class="progress-bar"></div>
+                </div>
+                <div class="button-group">
+                    <div class="button-grid">
+                        <button id="btn-download" class="btn btn-primary">
+                            <img src="圖示/下載.svg" alt="下載" class="icon-img">
+                            下載
+                        </button>
+                        <button id="btn-write" class="btn">
+                            <img src="圖示/寫入.svg" alt="寫入" class="icon-img">
+                            寫入 Hosts
+                        </button>
+                    </div>
+                     <button id="btn-undo" class="btn">
+                        <img src="圖示/還原.svg" alt="還原" class="icon-img">
+                        還原
+                    </button>
+                </div>
+                <footer class="app-footer">
+                    <span>版本: 1.2.0</span>
+                    <span>Developer by OTAKU</span>
+                </footer>
+            </div>
+            <div class="right-panel">
+                <header class="log-header">
+                    <h2>輸出日誌</h2>
+                    <button id="btn-clear" class="btn btn-icon" title="清除日誌">
+                        <img src="圖示/清除日誌.svg" alt="清除日誌" class="icon-img">
+                    </button>
+                </header>
+                <div id="output-box" class="output-box">
+                    <div class="empty-state">
+                        <img src="圖示/日誌空狀態.svg" alt="日誌空狀態" class="icon-img-large">
+                        <p>歡迎使用 Hosts Updater！</p>
+                        <span>開始操作後，此處將會顯示詳細日誌。</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主要腳本 -->
+    <script src="script.js"></script>
+</body>
+</html>

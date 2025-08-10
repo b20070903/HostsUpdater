@@ -1,0 +1,167 @@
+/* --- 全域變數與基礎設定 --- */
+:root {
+    /* 顏色 */
+    --primary-color-start: #007BFF;
+    --primary-color-end: #00C6FF;
+    --success-color: #28A745;
+    --error-color: #DC3545;
+    --warning-color: #ffc107;
+    --info-color: #17A2B8;
+    --text-color: #EAEAEA;
+    --text-color-muted: #A0A0A0;
+    --border-color: rgba(255, 255, 255, 0.15);
+    --panel-bg-color: rgba(30, 30, 35, 0.65);
+    --input-bg-color: rgba(0, 0, 0, 0.25);
+    --btn-bg-color: rgba(255, 255, 255, 0.08);
+    --btn-bg-hover: rgba(255, 255, 255, 0.12);
+
+    /* 字體 */
+    --font-family: 'Inter', 'Noto Sans TC', system-ui, -apple-system, sans-serif;
+
+    /* 尺寸與圓角 */
+    --border-radius: 14px;
+    --panel-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    --primary-glow: 0 0 20px rgba(0, 123, 255, 0.4);
+}
+
+/* --- 動畫定義 --- */
+@keyframes background-pan {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- 管理員警告橫幅 --- */
+#admin-warning-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--error-color);
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 100;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+}
+
+#admin-warning-banner .icon-img-banner {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+/* --- 基礎樣式 --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: var(--font-family);
+    background: linear-gradient(135deg, #121212, #1a1a1f, #121212);
+    background-size: 250% 250%;
+    color: var(--text-color);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: background-pan 25s ease infinite;
+}
+.app-wrapper {
+    opacity: 0;
+    animation: fade-in-up 0.8s 0.1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+.main-container {
+    display: flex;
+    width: 97vw;
+    height: 96vh;
+    max-width: 1200px;
+    gap: 20px;
+    background: var(--panel-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--panel-shadow);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    padding: 25px;
+}
+.left-panel, .right-panel { display: flex; flex-direction: column; }
+.left-panel { width: 350px; flex-shrink: 0; gap: 20px; }
+.right-panel { flex-grow: 1; display: flex; flex-direction: column; }
+.logo-container { text-align: center; padding-bottom: 5px; }
+.logo { height: 55px; width: auto; opacity: 0.9; filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.1)); transition: all 0.3s ease-in-out; }
+.logo:hover { filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.2)); transform: scale(1.05); }
+.control-section label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 500; color: var(--text-color-muted); }
+.control-section input { width: 100%; padding: 12px 14px; background-color: var(--input-bg-color); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); font-size: 14px; transition: all 0.3s ease; }
+.control-section input::placeholder { color: var(--text-color-muted); }
+.control-section input:focus { outline: none; border-color: var(--primary-color-start); box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3); }
+.input-with-button { display: flex; gap: 8px; }
+.input-with-button input { flex-grow: 1; }
+.progress-bar-container { height: 5px; width: 100%; background-color: var(--input-bg-color); border-radius: 5px; overflow: hidden; position: relative; }
+.progress-bar { position: absolute; top: 0; bottom: 0; background: linear-gradient(90deg, var(--primary-color-start), var(--primary-color-end)); border-radius: 5px; opacity: 0; transition: opacity 0.3s ease; }
+.progress-bar.active { opacity: 1; animation: indeterminate-progress 2s infinite ease-in-out; }
+@keyframes indeterminate-progress { 0% { left: -35%; right: 100%; } 60% { left: 100%; right: -90%; } 100% { left: 100%; right: -90%; } }
+.button-group { display: flex; flex-direction: column; gap: 12px; }
+.button-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer; font-weight: 500; font-size: 14px; transition: all 0.2s ease-in-out; background-color: var(--btn-bg-color); color: var(--text-color); }
+
+.icon-img {
+    width: 16px;
+    height: 16px;
+}
+
+.btn:hover:not(:disabled) { background-color: var(--btn-bg-hover); transform: translateY(-2px); border-color: rgba(255, 255, 255, 0.25); }
+.btn:active:not(:disabled) { transform: translateY(0) scale(0.98); }
+.btn.btn-primary { background: linear-gradient(135deg, var(--primary-color-start), var(--primary-color-end)); color: white; border: none; }
+.btn.btn-primary:hover:not(:disabled) { box-shadow: var(--primary-glow); border: none; }
+.btn.btn-danger { background: var(--error-color); color: white; border: none; }
+.btn.glowing { animation: glow 1.5s infinite ease-in-out; }
+@keyframes glow { 0%, 100% { box-shadow: 0 0 5px var(--primary-color-end); } 50% { box-shadow: 0 0 20px var(--primary-color-end); } }
+.btn:disabled { background-color: rgba(50, 50, 50, 0.5); cursor: not-allowed; color: #666; transform: none; box-shadow: none; border-color: var(--border-color); }
+.btn-icon { flex-shrink: 0; width: 45px; padding: 12px; }
+.app-footer { margin-top: auto; padding-top: 15px; font-size: 12px; color: var(--text-color-muted); display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); }
+.log-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 15px; border-bottom: 1px solid var(--border-color); flex-shrink: 0; }
+.log-header h2 { margin: 0; font-size: 18px; font-weight: 600; }
+.output-box { flex-grow: 1; background-color: var(--input-bg-color); border-radius: 8px; padding: 10px; font-family: 'SF Mono', 'Consolas', 'Courier New', monospace; overflow-y: auto; position: relative; display: flex; flex-direction: column; gap: 8px; margin-top: 15px; }
+.output-box::-webkit-scrollbar { width: 6px; }
+.output-box::-webkit-scrollbar-track { background: transparent; }
+.output-box::-webkit-scrollbar-thumb { background-color: rgba(255, 255, 255, 0.2); border-radius: 3px; }
+.log { display: flex; align-items: flex-start; gap: 12px; padding: 10px; border-radius: 6px; background-color: rgba(255, 255, 255, 0.03); border: 1px solid transparent; transition: all 0.2s ease-in-out; animation: fade-in-up 0.4s ease-out; }
+.log:hover { background-color: rgba(255, 255, 255, 0.07); border-color: rgba(255, 255, 255, 0.1); }
+.log-icon { flex-shrink: 0; margin-top: 2px; }
+.log-icon .icon-img { width: 16px; height: 16px; }
+.log-content { flex-grow: 1; display: flex; flex-direction: column; }
+.log-message { color: var(--text-color); font-size: 14px; line-height: 1.6; white-space: pre-wrap; word-break: break-all; }
+.log-timestamp { font-size: 12px; color: var(--text-color-muted); margin-top: 4px; align-self: flex-end; }
+.empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text-color-muted); text-align: center; transition: opacity 0.3s ease-out; padding: 20px; }
+.empty-state .icon-img-large { width: 48px; height: 48px; margin-bottom: 16px; opacity: 0.4; }
+.empty-state p { font-size: 16px; font-weight: 500; color: var(--text-color); margin-bottom: 4px; }
+.empty-state span { font-size: 13px; }
+
+/* --- 關閉「標題」的所有動畫與互動效果 --- */
+
+/* 1) App 標題（logo）去除發光、縮放、過渡 */
+.logo {
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+}
+.logo:hover {
+    filter: none !important;
+    transform: none !important;
+}
+
+/* 2) 區塊標題（例如「輸出日誌」）保險起見也關閉動畫／過渡 */
+.log-header h2 {
+    animation: none !important;
+    transition: none !important;
+}
